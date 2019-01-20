@@ -1,0 +1,1 @@
+INSERT INTO Employee (name) VALUES ('Mark');
