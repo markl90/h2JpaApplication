@@ -1,8 +1,6 @@
-package com.mark.Applicationh2JPA.Service.Repository;
+package com.mark.Applicationh2JPA.service.Repository;
 
 import com.mark.Applicationh2JPA.entity.Employee;
-
-import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

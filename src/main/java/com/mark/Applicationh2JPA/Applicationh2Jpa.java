@@ -1,7 +1,7 @@
 package com.mark.Applicationh2JPA;
 
-import com.mark.Applicationh2JPA.Service.Business.EmployeeService;
-import com.mark.Applicationh2JPA.Service.Business.EmployeeServiceImplementation;
+import com.mark.Applicationh2JPA.service.business.EmployeeService;
+import com.mark.Applicationh2JPA.service.business.EmployeeServiceImplementation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,10 +20,6 @@ public class Applicationh2Jpa {
 		return new EmployeeServiceImplementation();
 	}
 
-//	@Bean
-//	public EmployeeRepository getEmployeeRepository() {
-//		return new Employeeh2Repository();
-//	}
 
 }
 

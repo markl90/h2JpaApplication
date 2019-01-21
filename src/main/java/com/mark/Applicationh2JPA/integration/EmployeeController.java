@@ -1,15 +1,12 @@
-package com.mark.Applicationh2JPA.Integration;
+package com.mark.Applicationh2JPA.integration;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.BaseJsonNode;
-import com.mark.Applicationh2JPA.Service.Business.EmployeeService;
-import com.mark.Applicationh2JPA.Service.Repository.EmployeeRepository;
+import com.mark.Applicationh2JPA.service.business.EmployeeService;
 import com.mark.Applicationh2JPA.entity.Employee;
-import org.hibernate.service.spi.InjectService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.websocket.server.PathParam;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -44,9 +41,10 @@ public class EmployeeController {
 
 
     @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable("id") int employeeId, @RequestBody Employee employee){
+    public Response updateEmployee(@PathVariable("id") int employeeId, @RequestBody Employee employee){
         employee.setEmployeeId(employeeId);
-        return employeeService.updateEmployee(employee);
+        //return Response.status(Status.OK).entity(employeeService.updateEmployee(employee)).build();
+        return Response.ok(employeeService.updateEmployee(employee)).build();
     }
 
     @DeleteMapping("/{id}")

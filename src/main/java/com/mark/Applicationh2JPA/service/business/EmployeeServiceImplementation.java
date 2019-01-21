@@ -1,4 +1,4 @@
-package com.mark.Applicationh2JPA.Service.Business;
+package com.mark.Applicationh2JPA.service.business;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,10 +6,9 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import com.mark.Applicationh2JPA.Service.Repository.EmployeeRepository;
+import com.mark.Applicationh2JPA.service.Repository.EmployeeRepository;
 import com.mark.Applicationh2JPA.entity.Employee;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.mark.Applicationh2JPA.util.EmployeeNotFoundException;
 
 /**
  * Created by U.8902078 on 19/01/2019.
@@ -36,10 +35,11 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		if (repository.existsById(employee.getEmployeeId())) {
 			return repository.save(employee);
 		}
-//		else {
-//			return new ResponseEntity(HttpStatus.NOT_FOUND);
-//		}
-		return null;
+		else {
+			//return new ResponseEntity(HttpStatus.NOT_FOUND);
+			throw new EmployeeNotFoundException();
+			//String.valueOf(HttpStatus.NOT_FOUND), new RuntimeException()
+		}
 	}
 
 	public List<Employee> deleteEmployee(Employee employee){
