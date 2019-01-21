@@ -2,18 +2,23 @@ package com.mark.Applicationh2JPA.Service.Business;
 
 import com.mark.Applicationh2JPA.entity.Employee;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Optional;
 
 /**
  * Created by U.8902078 on 19/01/2019.
  */
 public interface EmployeeService {
 
-    String getAllEmployees();
+    Collection<Employee> getAllEmployees();
 
-    String createEmployee(String employee);
+    Employee createEmployee(Employee employee);
 
-    String updateEmployee(int id, String update);
+    Employee updateEmployee(Employee employee);
 
-    String deleteEmployee();
+    Collection<Employee> deleteEmployee(Employee employee);
+
+    Collection<Employee> deleteAllEmployees();
+
+    Optional<Employee> findById(long id);
 }
