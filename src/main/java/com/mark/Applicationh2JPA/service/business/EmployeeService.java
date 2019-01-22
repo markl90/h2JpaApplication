@@ -1,5 +1,6 @@
 package com.mark.Applicationh2JPA.service.business;
 
+import com.mark.Applicationh2JPA.entity.Address;
 import com.mark.Applicationh2JPA.entity.Employee;
 
 import java.util.Collection;
@@ -21,4 +22,6 @@ public interface EmployeeService {
     Collection<Employee> deleteAllEmployees();
 
     Optional<Employee> findById(long id);
+
+    Employee addAddress(long employeelId, Address address);
 }

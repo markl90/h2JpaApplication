@@ -1,4 +1,4 @@
-package com.mark.Applicationh2JPA.service.Repository;
+package com.mark.Applicationh2JPA.service.repository;
 
 import com.mark.Applicationh2JPA.entity.Employee;
 

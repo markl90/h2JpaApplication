@@ -6,7 +6,8 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import com.mark.Applicationh2JPA.service.Repository.EmployeeRepository;
+import com.mark.Applicationh2JPA.entity.Address;
+import com.mark.Applicationh2JPA.service.repository.EmployeeRepository;
 import com.mark.Applicationh2JPA.entity.Employee;
 import com.mark.Applicationh2JPA.util.EmployeeNotFoundException;
 
@@ -38,7 +39,6 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		else {
 			//return new ResponseEntity(HttpStatus.NOT_FOUND);
 			throw new EmployeeNotFoundException();
-			//String.valueOf(HttpStatus.NOT_FOUND), new RuntimeException()
 		}
 	}
 
@@ -55,6 +55,19 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
 	public Optional<Employee> findById(long id) {
 		return repository.findById(id);
+	}
+
+
+	public Employee addAddress(long employeelId, Address address) {
+		if (repository.existsById(employeelId)) {
+			Employee employee = repository.findById(employeelId).orElse(null);
+			employee.setAddress(address);
+
+			return repository.save(employee);
+		}
+		else {
+			throw new EmployeeNotFoundException();
+		}
 	}
 
 

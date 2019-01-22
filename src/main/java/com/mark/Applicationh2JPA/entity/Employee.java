@@ -12,9 +12,13 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long employeeId;
+    private Long employeeId;
 
     private String name;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "addressId")
+    private Address address;
 
     public Employee(){}
 
@@ -23,11 +27,11 @@ public class Employee {
         this.name = name;
     }
 
-    public long getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(long employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
@@ -45,5 +49,13 @@ public class Employee {
                 "employeeId=" + employeeId +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

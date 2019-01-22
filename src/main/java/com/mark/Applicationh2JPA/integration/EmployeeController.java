@@ -1,7 +1,9 @@
 package com.mark.Applicationh2JPA.integration;
 
+import com.mark.Applicationh2JPA.entity.Address;
 import com.mark.Applicationh2JPA.service.business.EmployeeService;
 import com.mark.Applicationh2JPA.entity.Employee;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -41,10 +43,10 @@ public class EmployeeController {
 
 
     @PutMapping("/{id}")
-    public Response updateEmployee(@PathVariable("id") int employeeId, @RequestBody Employee employee){
+    public ResponseEntity updateEmployee(@PathVariable("id") Long employeeId, @RequestBody Employee employee){
         employee.setEmployeeId(employeeId);
-        //return Response.status(Status.OK).entity(employeeService.updateEmployee(employee)).build();
-        return Response.ok(employeeService.updateEmployee(employee)).build();
+        return ResponseEntity.ok().body(employeeService.updateEmployee(employee));
+        //return employeeService.updateEmployee(employee);
     }
 
     @DeleteMapping("/{id}")
@@ -62,5 +64,9 @@ public class EmployeeController {
         return employeeService.findById(id);
     }
 
+    @PutMapping("/{id}/address")
+    public Employee addAddress(@PathVariable("id") long employeelId, @RequestBody Address address){
+        return employeeService.addAddress(employeelId, address);
+    }
 
 }
