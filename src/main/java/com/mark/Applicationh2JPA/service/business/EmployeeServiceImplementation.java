@@ -61,6 +61,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	public Employee addAddress(long employeelId, Address address) {
 		if (repository.existsById(employeelId)) {
 			Employee employee = repository.findById(employeelId).orElse(null);
+				if (employee.getAddress() != null){
+					address.setAddressId(employee.getAddress().getAddressId());
+				}
 			employee.setAddress(address);
 
 			return repository.save(employee);
