@@ -1,5 +1,7 @@
 package com.mark.Applicationh2JPA.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 
 /**
@@ -7,6 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "Employee")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Employee {
 
 
@@ -16,8 +19,7 @@ public class Employee {
 
     private String name;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "addressId")
+    @OneToOne(cascade = {CascadeType.ALL}, mappedBy = "employee")
     private Address address;
 
     public Employee(){}
@@ -57,5 +59,12 @@ public class Employee {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public boolean addressExists(){
+        if (address != null){
+            return true;
+        }
+        return false;
     }
 }

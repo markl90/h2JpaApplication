@@ -21,7 +21,9 @@ public interface EmployeeService {
 
     Collection<Employee> deleteAllEmployees();
 
-    Optional<Employee> findById(long id);
+    Employee findById(long id);
 
     Employee addAddress(long employeelId, Address address);
+
+    Collection<Employee> findByName(String name);
 }

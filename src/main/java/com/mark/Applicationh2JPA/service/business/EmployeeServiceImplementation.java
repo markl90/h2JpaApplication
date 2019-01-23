@@ -1,10 +1,12 @@
 package com.mark.Applicationh2JPA.service.business;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import com.mark.Applicationh2JPA.entity.Address;
 import com.mark.Applicationh2JPA.service.repository.EmployeeRepository;
@@ -34,10 +36,10 @@ public class EmployeeServiceImplementation implements EmployeeService {
 
 	public Employee updateEmployee(Employee employee){
 		if (repository.existsById(employee.getEmployeeId())) {
+			employee.setAddress(repository.findById(employee.getEmployeeId()).orElse(null).getAddress());
 			return repository.save(employee);
 		}
 		else {
-			//return new ResponseEntity(HttpStatus.NOT_FOUND);
 			throw new EmployeeNotFoundException();
 		}
 	}
@@ -53,20 +55,25 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	}
 
 
-	public Optional<Employee> findById(long id) {
-		return repository.findById(id);
+	public Employee findById(long id) {
+		Optional<Employee> optionalEmployee = repository.findById(id);
+		return optionalEmployee.orElseGet(() -> {throw new EmployeeNotFoundException();});
+	}
+
+	public Collection<Employee> findByName(String name){
+		return repository.findByName(name);
 	}
 
 
-	public Employee addAddress(long employeelId, Address address) {
-		if (repository.existsById(employeelId)) {
-			Employee employee = repository.findById(employeelId).orElse(null);
-				if (employee.getAddress() != null){
-					address.setAddressId(employee.getAddress().getAddressId());
-				}
+	public Employee addAddress(long employeeId, Address address) {
+		Optional<Employee> optionalEmployee = repository.findById(employeeId);
+		if(optionalEmployee.isPresent()) {
+			Employee employee = optionalEmployee.get();
+			address.setEmployee(employee);
+			address.setId(employeeId);
 			employee.setAddress(address);
-
 			return repository.save(employee);
+
 		}
 		else {
 			throw new EmployeeNotFoundException();

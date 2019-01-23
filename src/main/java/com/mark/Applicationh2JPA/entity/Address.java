@@ -1,5 +1,7 @@
 package com.mark.Applicationh2JPA.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -10,17 +12,19 @@ import javax.persistence.*;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long addressId;
+    private Long id;
 
-//    @OneToOne(cascade = {CascadeType.ALL})
-//    private Employee employee;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @MapsId
+    private Employee employee;
 
     private String address;
 
-    public Address(){}
+    public Address() {
+    }
 
-    public Address(String address){
+    public Address(String address) {
         this.address = address;
     }
 
@@ -33,20 +37,19 @@ public class Address {
         this.address = address;
     }
 
-    public Long getAddressId() {
-        return addressId;
+    public Long getId() {
+        return id;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
 
-//    public Employee getEmployee() {
-//        return employee;
-//    }
-//
-//    public void setEmployee(Employee employee) {
-//        this.employee = employee;
-//    }
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 }

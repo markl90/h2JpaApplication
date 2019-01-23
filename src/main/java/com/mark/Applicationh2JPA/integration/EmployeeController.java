@@ -1,17 +1,12 @@
 package com.mark.Applicationh2JPA.integration;
 
 import com.mark.Applicationh2JPA.entity.Address;
-import com.mark.Applicationh2JPA.service.business.EmployeeService;
 import com.mark.Applicationh2JPA.entity.Employee;
-import org.springframework.http.ResponseEntity;
+import com.mark.Applicationh2JPA.service.business.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
 import java.util.Collection;
-import java.util.Optional;
 
 /**
  * Created by U.8902078 on 19/01/2019.
@@ -30,10 +25,10 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-//    @RequestMapping("/byName/{name}")
-//    public Employee findByName(@PathParam("name") String name){
-//        return employeeRepo.findByName(name);
-//    }
+    @RequestMapping("/byName/{name}")
+    public Collection<Employee> findByName(@PathVariable("name") String name){
+        return employeeService.findByName(name);
+    }
 
 
     @PostMapping(consumes = "application/json")
@@ -43,10 +38,10 @@ public class EmployeeController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity updateEmployee(@PathVariable("id") Long employeeId, @RequestBody Employee employee){
+    public Employee updateEmployee(@PathVariable("id") Long employeeId, @RequestBody Employee employee){
         employee.setEmployeeId(employeeId);
-        return ResponseEntity.ok().body(employeeService.updateEmployee(employee));
-        //return employeeService.updateEmployee(employee);
+       // return ResponseEntity.ok().body(employeeService.updateEmployee(employee));
+        return employeeService.updateEmployee(employee);
     }
 
     @DeleteMapping("/{id}")
@@ -60,7 +55,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Employee> findById(@PathVariable("id") long id){
+    public Employee findById(@PathVariable("id") long id){
         return employeeService.findById(id);
     }
 
