@@ -3,6 +3,7 @@ package com.mark.Applicationh2JPA.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by U.8902078 on 18/01/2019.
@@ -21,6 +22,9 @@ public class Employee {
 
     @OneToOne(cascade = {CascadeType.ALL}, mappedBy = "employee")
     private Address address;
+
+    @OneToMany(mappedBy = "employee")
+    private Set<Asset> assets;
 
     public Employee(){}
 
@@ -66,5 +70,17 @@ public class Employee {
             return true;
         }
         return false;
+    }
+
+    public Set<Asset> getAssets() {
+        return assets;
+    }
+
+    public void setAssets(Set<Asset> assets) {
+        this.assets = assets;
+    }
+
+    public void addAsset(Asset asset){
+        assets.add(asset);
     }
 }

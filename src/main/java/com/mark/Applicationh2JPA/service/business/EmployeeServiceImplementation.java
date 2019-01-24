@@ -1,14 +1,12 @@
 package com.mark.Applicationh2JPA.service.business;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import com.mark.Applicationh2JPA.entity.Address;
+import com.mark.Applicationh2JPA.entity.Asset;
 import com.mark.Applicationh2JPA.service.repository.EmployeeRepository;
 import com.mark.Applicationh2JPA.entity.Employee;
 import com.mark.Applicationh2JPA.util.EmployeeNotFoundException;
@@ -72,6 +70,31 @@ public class EmployeeServiceImplementation implements EmployeeService {
 			address.setEmployee(employee);
 			address.setId(employeeId);
 			employee.setAddress(address);
+			return repository.save(employee);
+
+		}
+		else {
+			throw new EmployeeNotFoundException();
+		}
+	}
+
+	public Employee addAsset(Long employeeId, Asset asset){
+		Optional<Employee> optionalEmployee = repository.findById(employeeId);
+		if(optionalEmployee.isPresent()) {
+			Employee employee = optionalEmployee.get();
+//			for (Asset asset : assets) {
+//				asset.setEmployee(employee);
+//			}
+			//address.setId(employeeId);
+			employee.addAsset(asset);
+
+			//employee.setAssets(new ArrayList<Asset>().add(asset));
+//			if(repository.findById(employeeId).get().getAssets() != null){
+//				employee.getAssets().addAll(assets);
+//			}
+//			else {
+//				employee.setAssets(assets);
+//			}
 			return repository.save(employee);
 
 		}
