@@ -23,7 +23,7 @@ public class Employee {
     @OneToOne(cascade = {CascadeType.ALL}, mappedBy = "employee")
     private Address address;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "employee")
     private Set<Asset> assets;
 
     public Employee(){}

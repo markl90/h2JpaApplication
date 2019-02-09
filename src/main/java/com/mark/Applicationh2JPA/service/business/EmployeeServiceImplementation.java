@@ -3,12 +3,12 @@ package com.mark.Applicationh2JPA.service.business;
 import java.util.*;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import com.mark.Applicationh2JPA.entity.Address;
 import com.mark.Applicationh2JPA.entity.Asset;
 import com.mark.Applicationh2JPA.service.repository.EmployeeRepository;
 import com.mark.Applicationh2JPA.entity.Employee;
+import com.mark.Applicationh2JPA.util.AssetAllocatedException;
 import com.mark.Applicationh2JPA.util.EmployeeNotFoundException;
 
 /**
@@ -53,7 +53,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	}
 
 
-	public Employee findById(long id) {
+	public Employee findById(Long id) {
 		Optional<Employee> optionalEmployee = repository.findById(id);
 		return optionalEmployee.orElseGet(() -> {throw new EmployeeNotFoundException();});
 	}
@@ -63,7 +63,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	}
 
 
-	public Employee addAddress(long employeeId, Address address) {
+	public Employee addAddress(Long employeeId, Address address) {
 		Optional<Employee> optionalEmployee = repository.findById(employeeId);
 		if(optionalEmployee.isPresent()) {
 			Employee employee = optionalEmployee.get();
@@ -82,25 +82,36 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		Optional<Employee> optionalEmployee = repository.findById(employeeId);
 		if(optionalEmployee.isPresent()) {
 			Employee employee = optionalEmployee.get();
-//			for (Asset asset : assets) {
-//				asset.setEmployee(employee);
-//			}
-			//address.setId(employeeId);
+
+			Employee currentOwner =  assetAlreadyAllocated(asset.getSerialCode());
+
+			if (currentOwner != null){
+				throw new AssetAllocatedException(currentOwner, asset);
+			}
+			asset.setEmployee(employee);
 			employee.addAsset(asset);
 
-			//employee.setAssets(new ArrayList<Asset>().add(asset));
-//			if(repository.findById(employeeId).get().getAssets() != null){
-//				employee.getAssets().addAll(assets);
-//			}
-//			else {
-//				employee.setAssets(assets);
-//			}
 			return repository.save(employee);
 
 		}
 		else {
 			throw new EmployeeNotFoundException();
 		}
+	}
+
+
+	public Employee assetAlreadyAllocated(String serialCode){
+		List<Employee> employees = getAllEmployees();
+		for (Employee employee : employees) {
+			Set<Asset> assets = employee.getAssets();
+			for (Asset asset: assets){
+				if (asset.getSerialCode().equals(serialCode)){
+					return employee;
+				}
+			}
+
+		}
+		return null;
 	}
 
 

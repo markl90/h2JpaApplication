@@ -15,6 +15,7 @@ import java.util.Set;
  */
 @RestController
 @RequestMapping("/employee")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EmployeeController {
 
 
@@ -40,7 +41,6 @@ public class EmployeeController {
     @PutMapping("/{id}")
     public Employee updateEmployee(@PathVariable("id") Long employeeId, @RequestBody Employee employee){
         employee.setEmployeeId(employeeId);
-       // return ResponseEntity.ok().body(employeeService.updateEmployee(employee));
         return employeeService.updateEmployee(employee);
     }
 
@@ -55,12 +55,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Employee findById(@PathVariable("id") long id){
+    public Employee findById(@PathVariable("id") Long id){
         return employeeService.findById(id);
     }
 
     @PutMapping("/{id}/address")
-    public Employee addAddress(@PathVariable("id") long employeelId, @RequestBody Address address){
+    public Employee addAddress(@PathVariable("id") Long employeelId, @RequestBody Address address){
         return employeeService.addAddress(employeelId, address);
     }
 
