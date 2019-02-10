@@ -1,4 +1,4 @@
-package com.mark.Applicationh2JPA.entity;
+package com.mark.employeeService.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

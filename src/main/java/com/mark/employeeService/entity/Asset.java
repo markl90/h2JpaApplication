@@ -1,4 +1,4 @@
-package com.mark.Applicationh2JPA.entity;
+package com.mark.employeeService.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,10 +11,6 @@ import javax.persistence.*;
 @Table(name = "Assets")
 public class Asset {
 
-
-
-
-    //private Long employeeid;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "employee_id")
@@ -29,6 +25,11 @@ public class Asset {
     private String serialCode;
 
     public Asset(){}
+
+    public Asset(String assetType, String serialCode){
+        this.assetType = assetType;
+        this.serialCode =serialCode;
+    }
 
     public Employee getEmployee() {
         return employee;

@@ -1,7 +1,7 @@
-package com.mark.Applicationh2JPA.util;
+package com.mark.employeeService.util.exceptions;
 
-import com.mark.Applicationh2JPA.entity.Asset;
-import com.mark.Applicationh2JPA.entity.Employee;
+import com.mark.employeeService.entity.Asset;
+import com.mark.employeeService.entity.Employee;
 
 public class AssetAllocatedException extends RuntimeException {
 

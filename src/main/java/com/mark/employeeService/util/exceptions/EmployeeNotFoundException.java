@@ -1,4 +1,4 @@
-package com.mark.Applicationh2JPA.util;
+package com.mark.employeeService.util.exceptions;
 
 
 public class EmployeeNotFoundException extends RuntimeException {

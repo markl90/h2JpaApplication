@@ -1,9 +1,8 @@
-package com.mark.Applicationh2JPA;
+package com.mark.employeeService;
 
-import com.mark.Applicationh2JPA.service.business.EmployeeService;
-import com.mark.Applicationh2JPA.service.business.EmployeeServiceImplementation;
+import com.mark.employeeService.service.EmployeeService;
+import com.mark.employeeService.service.EmployeeServiceImplementation;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 

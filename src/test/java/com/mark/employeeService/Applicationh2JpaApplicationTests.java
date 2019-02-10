@@ -1,4 +1,4 @@
-package com.mark.Applicationh2JPA;
+package com.mark.employeeService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

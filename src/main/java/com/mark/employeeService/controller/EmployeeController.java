@@ -1,18 +1,17 @@
-package com.mark.Applicationh2JPA.integration;
+package com.mark.employeeService.controller;
 
-import com.mark.Applicationh2JPA.entity.Address;
-import com.mark.Applicationh2JPA.entity.Asset;
-import com.mark.Applicationh2JPA.entity.Employee;
-import com.mark.Applicationh2JPA.service.business.EmployeeService;
+import com.mark.employeeService.entity.Address;
+import com.mark.employeeService.entity.Asset;
+import com.mark.employeeService.entity.Employee;
+import com.mark.employeeService.service.EmployeeService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.Collection;
-import java.util.Set;
 
-/**
- * Created by U.8902078 on 19/01/2019.
- */
 @RestController
 @RequestMapping("/employee")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -45,8 +44,10 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public Collection<Employee> deleteEmployee(@PathVariable("id") long id){
-        return employeeService.deleteEmployee(new Employee(id, null));
+    public ResponseEntity deleteEmployee(@PathVariable("id") Long id){
+        Employee employee = employeeService.deleteEmployee(id);
+        String responseMessage = String.format("Employee: %s ID: %s has been deleted from records.", employee.getName(), employee.getEmployeeId());
+        return new ResponseEntity<>(responseMessage, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteAll")

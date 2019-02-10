@@ -1,4 +1,4 @@
-package com.mark.Applicationh2JPA.entity;
+package com.mark.employeeService.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -12,7 +12,6 @@ import java.util.Set;
 @Table(name = "Employee")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Employee {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,6 +80,6 @@ public class Employee {
     }
 
     public void addAsset(Asset asset){
-        assets.add(asset);
+       assets.add(asset);
     }
 }
