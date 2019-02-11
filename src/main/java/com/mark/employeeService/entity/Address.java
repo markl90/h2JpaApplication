@@ -15,7 +15,7 @@ public class Address {
     private Long id;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private Employee employee;
 

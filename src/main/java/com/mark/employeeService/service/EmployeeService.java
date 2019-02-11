@@ -26,4 +26,6 @@ public interface EmployeeService {
     Collection<Employee> findByName(String name);
 
     Employee addAsset(Long employeeId, Asset assets);
+
+    Employee deleteAddress(Long employeelId);
 }

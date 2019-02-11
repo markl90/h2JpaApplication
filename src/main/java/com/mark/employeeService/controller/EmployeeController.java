@@ -27,8 +27,8 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-    @RequestMapping("/byName/{name}")
-    public Collection<Employee> findByName(@PathVariable("name") String name){
+    @RequestMapping("/search")
+    public Collection<Employee> findByName(@RequestParam("name") String name){
         return employeeService.findByName(name);
     }
 
@@ -60,14 +60,24 @@ public class EmployeeController {
         return employeeService.findById(id);
     }
 
+
+
+    //Address
     @PutMapping("/{id}/address")
     public Employee addAddress(@PathVariable("id") Long employeelId, @RequestBody Address address){
         return employeeService.addAddress(employeelId, address);
+    }
+
+    @DeleteMapping("/{id}/address")
+    public Employee deleteAddress(@PathVariable("id") Long employeelId){
+        return employeeService.deleteAddress(employeelId);
     }
 
     @PutMapping("/{id}/assets")
     public Employee addAssets(@PathVariable("id") Long employeeId, @RequestBody Asset asset){
         return employeeService.addAsset(employeeId, asset);
     }
+
+
 
 }

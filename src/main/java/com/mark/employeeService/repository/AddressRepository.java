@@ -1,7 +1,11 @@
 package com.mark.employeeService.repository;
 
-/**
- * Created by U.8902078 on 11/02/2019.
- */
-public interface AddressRepository {
+import com.mark.employeeService.entity.Address;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AddressRepository extends CrudRepository<Address, Long> {
+
+
 }

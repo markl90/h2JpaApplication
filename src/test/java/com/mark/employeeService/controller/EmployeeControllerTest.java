@@ -1,14 +1,12 @@
 package com.mark.employeeService.controller;
 
-import com.mark.employeeService.Applicationh2Jpa;
+import com.mark.employeeService.Application;
 import com.mark.employeeService.entity.Employee;
 import com.mark.employeeService.repository.EmployeeRepository;
-import com.mark.employeeService.service.EmployeeRepositoryTestImplementation;
 import com.mark.employeeService.service.EmployeeServiceImplementation;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -19,14 +17,14 @@ public class EmployeeControllerTest {
 
 
     @Configuration
-    @Import(Applicationh2Jpa.class) // the actual configuration
+    @Import(Application.class) // the actual configuration
     public static class TestConfig
     {
-        @Bean
-        public EmployeeRepository employeeRepository()
-        {
-            return new EmployeeRepositoryTestImplementation();
-        }
+//        @Bean
+//        public EmployeeRepository employeeRepository()
+//        {
+//            return new EmployeeRepositoryTestImplementation();
+//        }
     }
 
     @Inject
@@ -56,7 +54,7 @@ public class EmployeeControllerTest {
     @Test
     public void getAllEmployees() {
         employeeController = new EmployeeController();
-        employeeRepository = new EmployeeRepositoryTestImplementation();
+       // employeeRepository = new EmployeeRepositoryTestImplementation();
         employeeService = new EmployeeServiceImplementation();
        Collection<Employee> employees = employeeController.getAllEmployees();
 

@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class EmployeeRepositoryTestImplementation implements EmployeeRepository {
+public abstract class EmployeeRepositoryTestImplementation implements EmployeeRepository {
 
     List<Employee> employeesList = new ArrayList<>();
 
@@ -38,6 +38,11 @@ public class EmployeeRepositoryTestImplementation implements EmployeeRepository 
     }
 
     public Collection<Employee> findByNameContaining(String name) {
+        return null;
+    }
+
+    @Override
+    public Collection<Employee> findByNameContainingIgnoreCase(String name) {
         return null;
     }
 
