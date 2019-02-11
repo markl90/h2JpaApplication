@@ -125,14 +125,14 @@ public class EmployeeServiceImplementationTest {
     public void findByName() {
         //create test employees and add them to a collection.
         Employee testEmployee = new Employee(102,"Mark Ledwold");
-        Employee secondTestEmployee = new Employee(102, "Harry Smith");
-        Employee thirdTestEmployee = new Employee(103, "James Baker");
+        Employee secondTestEmployee = new Employee(102, "mark Smith");
+        Employee thirdTestEmployee = new Employee(103, "Mark Baker");
         List<Employee> employeeCollection = new ArrayList<Employee>();
         employeeCollection.add(testEmployee);
         employeeCollection.add(secondTestEmployee);
         employeeCollection.add(thirdTestEmployee);
         //Set the mock response for the repository to return the collection.
-        when(employeeRepository.findByNameContaining("Mark")).thenReturn(employeeCollection);
+        when(employeeRepository.findByNameContainingIgnoreCase("Mark")).thenReturn(employeeCollection);
 
         //Get the response from the service and convert to an array list.
         Collection<Employee> responseCollection = employeeService.findByName("Mark");

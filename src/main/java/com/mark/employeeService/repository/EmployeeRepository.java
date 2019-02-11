@@ -15,5 +15,4 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
 	Collection<Employee> findByNameContainingIgnoreCase(String name);
 
-	//void removeAddress(Address address);
 }

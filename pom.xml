@@ -11,10 +11,10 @@
 	</parent>
 
 	<groupId>com.mark</groupId>
-	<artifactId>Applicationh2JPA</artifactId>
+	<artifactId>employee-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Applicationh2JPA</name>
-	<description>JPA and H2</description>
+	<name>employee-service</name>
+	<description>service for managing employee data</description>
 
 	<properties>
 		<java.version>1.8</java.version>
