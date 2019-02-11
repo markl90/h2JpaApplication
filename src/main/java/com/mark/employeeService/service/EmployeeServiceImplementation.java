@@ -1,20 +1,16 @@
 package com.mark.employeeService.service;
 
-import java.util.*;
-
-import javax.inject.Inject;
-import javax.transaction.Transactional;
-
 import com.mark.employeeService.entity.Address;
 import com.mark.employeeService.entity.Asset;
+import com.mark.employeeService.entity.Employee;
 import com.mark.employeeService.repository.AddressRepository;
 import com.mark.employeeService.repository.EmployeeRepository;
-import com.mark.employeeService.entity.Employee;
 import com.mark.employeeService.util.exceptions.AssetAllocatedException;
 import com.mark.employeeService.util.exceptions.EmployeeNotFoundException;
 import com.mark.employeeService.util.exceptions.UndefinedSearchException;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import javax.inject.Inject;
+import java.util.*;
 
 
 public class EmployeeServiceImplementation implements EmployeeService {
@@ -73,13 +69,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	}
 
 	public Collection<Employee> findByName(String name){
-
 		if (name.length()>3) {
-//			String upperCase = name.replace(name.substring(0, 1), name.substring(0, 1).toUpperCase(Locale.ENGLISH));
-//			String lowerCase = name.replace(name.substring(0, 1), name.substring(0, 1).toLowerCase(Locale.ENGLISH));
-//			Collection<Employee> search = repository.findByNameContaining(upperCase);
-//			Collection<Employee> lowerCaseSearch = repository.findByNameContainingIgnoreCase(name);
-//			search.addAll(lowerCaseSearch);
 			return repository.findByNameContainingIgnoreCase(name);
 		}
 		else {
@@ -123,9 +113,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
 			// Check asset serial code not already allocated.
 			Employee currentOwner =  assetAlreadyAllocated(asset.getSerialCode());
 
-			if (currentOwner != null){
-				throw new AssetAllocatedException(currentOwner, asset);
-			}
+				if (currentOwner != null){
+					throw new AssetAllocatedException(currentOwner, asset);
+				}
 			asset.setEmployee(employee);
 			employee.addAsset(asset);
 			return repository.save(employee);

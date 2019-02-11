@@ -21,28 +21,33 @@ public class EmployeeController {
     @Inject
     private EmployeeService employeeService;
 
-    
+
+    //Find all employees
     @GetMapping
     public Collection<Employee> getAllEmployees(){
         return employeeService.getAllEmployees();
     }
 
+    //Search by name with URL Parameter
     @RequestMapping("/search")
     public Collection<Employee> findByName(@RequestParam("name") String name){
         return employeeService.findByName(name);
     }
 
+    //Create new Employee
     @PostMapping(consumes = "application/json")
     public Employee createEmployee(@RequestBody Employee employee){
         return employeeService.createEmployee(employee);
     }
 
+    //Update existing Employee
     @PutMapping("/{id}")
     public Employee updateEmployee(@PathVariable("id") Long employeeId, @RequestBody Employee employee){
         employee.setEmployeeId(employeeId);
         return employeeService.updateEmployee(employee);
     }
 
+    //Delete Employee by ID
     @DeleteMapping("/{id}")
     public ResponseEntity deleteEmployee(@PathVariable("id") Long id){
         Employee employee = employeeService.deleteEmployee(id);
@@ -50,11 +55,13 @@ public class EmployeeController {
         return new ResponseEntity<>(responseMessage, HttpStatus.OK);
     }
 
+    //Purge all Employees
     @DeleteMapping("/deleteAll")
     public Collection<Employee> deleteAllEmployees(){
         return employeeService.deleteAllEmployees();
     }
 
+    //Find Employee by ID
     @GetMapping("/{id}")
     public Employee findById(@PathVariable("id") Long id){
         return employeeService.findById(id);
@@ -77,7 +84,5 @@ public class EmployeeController {
     public Employee addAssets(@PathVariable("id") Long employeeId, @RequestBody Asset asset){
         return employeeService.addAsset(employeeId, asset);
     }
-
-
 
 }

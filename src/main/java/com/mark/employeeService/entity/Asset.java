@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
-/**
- * Created by U.8902078 on 24/01/2019.
- */
 @Entity
 @Table(name = "Assets")
 public class Asset {

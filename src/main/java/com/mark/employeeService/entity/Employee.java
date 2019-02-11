@@ -5,9 +5,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import javax.persistence.*;
 import java.util.Set;
 
-/**
- * Created by U.8902078 on 18/01/2019.
- */
 @Entity
 @Table(name = "Employee")
 @JsonInclude(JsonInclude.Include.NON_NULL)

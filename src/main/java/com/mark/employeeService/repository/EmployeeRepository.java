@@ -1,6 +1,5 @@
 package com.mark.employeeService.repository;
 
-import com.mark.employeeService.entity.Address;
 import com.mark.employeeService.entity.Employee;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

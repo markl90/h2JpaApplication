@@ -50,7 +50,7 @@ public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler
 
     @ExceptionHandler (value = AssetAllocatedException.class)
     public ResponseEntity<Object> handleAssetConflict(AssetAllocatedException ex,  WebRequest request) {
-        String bodyOfResponse = String.format("The asset you are attempting to allocate - %s model - %s \n" +
+        String bodyOfResponse = String.format("The asset you are attempting to allocate - %s model - %s" +
                         "Has already been allocated to %s employee ID %s", ex.getAsset().getAssetType(),  ex.getAsset().getSerialCode(), ex.getEmployee().getName(),  ex.getEmployee().getEmployeeId());
         ErrorMessage errorMessage = new ErrorMessage(bodyOfResponse,"Cannot complete request", 409);
         return handleExceptionInternal(ex, errorMessage, new HttpHeaders(), HttpStatus.CONFLICT, request);
